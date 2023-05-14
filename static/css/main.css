@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --acento:#177D6B;
+  --acento-hover:#0D6354;
+  --acento-focus:#145874;
+  --background-color:#F5F6F7;
+  --input-focus: #F1F3F4;
+  --input-background:#F5F7FB;
+  --input-radius-color:#d5d7db;
+  --gh-white: #FFF;
+  --gh-black: #24292e;
+  --gh-flash: #52878E;
+
+  --font-weight-normal:400;
+  --font-weight-bold:600;
+  --font-family: 'Inter','Unica77','sans-serif';
+  --font-size-welcome:2.7em;
+  --font-size-title: 25px;
+  --font-size-label: 16px;
+  --font-size-normal: 14px;
+  --font-size-button: 16px;
+
+  --border-radius-input: 5px;
+  --border-radius-button: 8px;
+
+  --button-width-min:150px;
+  --button-height-min:2.4em;
+  --button-width-max:250px;
+  --button-height-max:3em;
+}
+
+body {
+  background: var(--background-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
+  letter-spacing: 0.25px;
+}
+
+h1{
+  font-weight:  var(--font-weight-bold);
+}
+
