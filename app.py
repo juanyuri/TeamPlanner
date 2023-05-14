@@ -27,7 +27,7 @@ def unauthorized_handler():
     return flask.redirect("/")
 
 @app.route("/login" , methods = ['GET','POST'])
-def get_index():
+def get_login():
     usr = UserDTO.current_user()
     
     if flask.request.method == "POST":
@@ -40,3 +40,22 @@ def get_index():
     }
     
     return flask.render_template("auth/login.html", **data)
+
+
+
+
+@app.route("/register" , methods = ['GET','POST'])
+def get_register():
+    usr = UserDTO.current_user()
+    
+    if flask.request.method == "POST":
+        nombre = flask.request.form["edNombre"]
+        email = flask.request.form["edEmail"]
+        password = flask.request.form["edPassword"]
+        usr = UserDTO(nombre, email, password)
+    
+    data = {
+        "usr": usr
+    }
+    
+    return flask.render_template("auth/register.html", **data)
