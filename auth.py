@@ -36,7 +36,7 @@ def login():
             login_user(usr)
             srp.save(usr)
             flash("Usuario registrado correctamente", category="success")
-            return redirect(url_for("auth.register"))
+            return redirect(url_for("views.home"))
         
     data = {
         "usr": usr
@@ -47,16 +47,18 @@ def login():
 
 
 @auth.route("/logout")
+@login_required
 def logout():
     logout_user()
     flash("Sesión cerrada!", category="success")
     return flask.redirect(url_for("auth.login"))
 
 
+
 @auth.route("/register")
 def register():
     usr = UserDTO.current_user()
-    data ={
+    data = {
         "usr": usr
     }
-    return flask.render_template("main/dashboard.html", **data)
+    return flask.render_template("auth/register.html", **data)

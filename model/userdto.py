@@ -30,7 +30,6 @@ class UserDTO(flask_login.UserMixin):
         usr = flask_login.current_user
         
         if usr.is_anonymous:
-            print("is annonymous")
             flask_login.logout_user()
             usr = None
             
