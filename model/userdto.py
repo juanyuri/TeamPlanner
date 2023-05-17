@@ -3,14 +3,13 @@ import flask_login
 import werkzeug.security as safe
 
 class UserDTO(flask_login.UserMixin):
-    def __init__(self, email, password):
-        self.__email = email
-        self.__password = password
-        
     def __init__(self, nombre, email, password):
         self.__nombre = nombre
         self.__email = email
         self.__password = password
+        
+    def __str__(self):
+        return "Nombre: " + self.__nombre + ". Email: " + self.__email 
     
     @property
     def email(self):
@@ -29,7 +28,15 @@ class UserDTO(flask_login.UserMixin):
     @staticmethod
     def current_user():
         usr = flask_login.current_user
+        
+        if usr.is_anonymous:
+            print("is annonymous")
+            flask_login.logout_user()
+            usr = None
+            
+        return usr
+
     
     @staticmethod
     def find(s: sirope.Sirope, email: str) -> "UserDTO":
-        return s.find_first(UserDto, lambda u: u.email == email)
+        return s.find_first(UserDTO, lambda u: u.email == email)

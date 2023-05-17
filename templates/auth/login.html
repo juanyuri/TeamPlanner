@@ -26,18 +26,31 @@
   <!-- Main -->
   <main class="container">
     <article class="grid">
+
+      {% if not usr.is_authenticated %}
       <div>
         <hgroup>
           <h1>Login</h1>
           <h2>Bienvenido, entrenador, introduzca sus datos</h2>
         </hgroup>
-        <form>
-          <input type="text" name="login"
+        <form action="/login" method="POST">
+          <input type="text"
+            id="edNombre"
+            name="edNombre"
             placeholder="Usuario"
             aria-label="Usuario"
             required
           />
-          <input type="password" name="password"
+          <input type="text"
+            id="edEmail"
+            name="edEmail"
+            placeholder="Email"
+            aria-label="Email"
+            required
+          />
+          <input type="password"
+            id="edPassword"
+            name="edPassword"
             placeholder="Contraseña"
             aria-label="Contrasena"
             required
@@ -48,10 +61,18 @@
               Recordar Usuario
             </label>
           </fieldset>
-          <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
+          <button type="submit" class="contrast">Login</button>
         </form>
       </div>
-      <div></div>
+      {% else %}
+      <div>
+        <hgroup>
+          <h1>Login</h1>
+          <h4>Ya has iniciado sesión, {{ usr.nombre }}, ¿desearías volver al dashboard?</h4>
+          <a href="/dashboard">Dashboard</a>  
+        </hgroup>
+      </div>
+      {% endif %}
     </article>
   </main>
 
