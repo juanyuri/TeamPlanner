@@ -1,13 +1,17 @@
 import flask
-from flask import Blueprint, render_template, request, url_for, flash, redirect
-import sirope
-from model.userdto import UserDTO
-
 import flask_login
-from flask_login import login_required, current_user, logout_user
+import sirope
+
+from flask import Blueprint, render_template, request, url_for, flash, redirect
+from flask_login import login_required, current_user, login_user, logout_user
+
+from model.userdto import UserDTO
 
 #Blueprint for application
 auth = Blueprint('auth', __name__)
+srp = sirope.Sirope()
+
+
 
 
 @auth.route("/login" , methods = ['GET','POST'])
@@ -20,14 +24,19 @@ def login():
         password = request.form.get("edPassword")
         remember = True if request.form.get('edRemember') else False
         
-        if len(nombre) < 4:
-            flash("El nombre debe tener una longitud superior a 4", category="error")
+        #TODO: Refactorizar a una función if-elses con returns
+        if len(nombre) < 2:
+            flash("El nombre debe tener una longitud superior a 2", category="error")
+        elif len(email) < 4:
+            flash("El email debe tener una longitud superior a 4", category="error")
+        elif len(password) < 4:
+            flash("La contraseña debe tener una longitud superior a 4", category="error")
         else:
             usr = UserDTO(nombre, email, password)
-            flask_login.login_user(usr)
+            login_user(usr)
+            srp.save(usr)
             flash("Usuario registrado correctamente", category="success")
-            redirect("main/dashboard")
-        #return flask.redirect("main/dashboard")
+            return redirect(url_for("auth.register"))
         
     data = {
         "usr": usr
@@ -36,13 +45,18 @@ def login():
     return flask.render_template("auth/login.html", **data)
 
 
+
 @auth.route("/logout")
 def logout():
-    print("Logged-out user")
     logout_user()
+    flash("Sesión cerrada!", category="success")
     return flask.redirect(url_for("auth.login"))
 
 
-@auth.route("/sign-up")
-def sign_up():
-    return "<h1>Register</h1>"
+@auth.route("/register")
+def register():
+    usr = UserDTO.current_user()
+    data ={
+        "usr": usr
+    }
+    return flask.render_template("main/dashboard.html", **data)
