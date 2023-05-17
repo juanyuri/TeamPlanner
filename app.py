@@ -1,9 +1,12 @@
 import flask
+import json
+
 import sirope
 import flask_login
-import json
 from model.userdto import UserDTO
 
+from auth import auth
+from views import views
 
 
 def create_app():
@@ -12,6 +15,9 @@ def create_app():
     app.config.from_file("config.json", load=json.load)
     srp = sirope.Sirope()
     lmanager.init_app(app)
+    
+    app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/")
 
     return lmanager, srp, app
 
@@ -30,7 +36,7 @@ def unauthorized_handler():
     return flask.redirect("/")
 
 
-
+"""
 @app.route("/login" , methods = ['GET','POST'])
 def get_login():
     usr = UserDTO.current_user()
@@ -80,3 +86,4 @@ def dashboard():
         "usr": usr
     }
     return flask.render_template("main/dashboard.html", **data)
+""" 
