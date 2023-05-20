@@ -18,14 +18,16 @@
 
     
     <a type="button" href="{{ url_for('views.teams') }}">Crear Equipo</a>
+    <br>
+    <a type="button" href="{{ url_for('views.types') }}">Crear Tipo</a>
 
     <table id="DexTable">
         <thead>
             <tr class="header">
                 <th class="DexTable-Row-Codigo-Header">Código Préstamo</th>
-                <th class="DexTable-Row-Creador-Header">Creador</th>
-                <th class="DexTable-Row-NombreEquipo-Header">Nombre del Equipo</th>
+                <th class="DexTable-Row-Nombre-Header">Nombre</th>
                 <th class="DexTable-Row-FechaCreacion-Header">Fecha de Creación</th>
+                <th class="DexTable-Row-Creador-Header">Creador</th>
             </tr>
         </thead>
 
@@ -33,9 +35,27 @@
             {% for team in teams %}
             <tr>
                 <td class="DexTable-Row-Codigo-Value">{{ team.codigo }}</td>
-                <td class="DexTable-Row-Creador-Header">{{ team.autor }}</td>
-                <td class="DexTable-Row-NombreEquipo-Header">{{ team.nombre }}</td>
-                <td class="DexTable-Row-FechaCreacion-Header">{{ team.fecha }}</td>
+                <td class="DexTable-Row-Nombre-Value">{{ team.nombre }}</td>
+                <td class="DexTable-Row-FechaCreacion-Value">{{ team.fecha }}</td>
+                <td class="DexTable-Row-Creador-Value">{{ team.autor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <table id="TypesTable">
+        <thead>
+            <tr class="header">
+                <th class="TypesTable-Row-Nombre-Header">Tipos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for type in types %}
+            <tr>
+                <td class="TypesTable-Row-Nombre-Value">{{ type.nombre }}</td>
             </tr>
             {% endfor %}
         </tbody>

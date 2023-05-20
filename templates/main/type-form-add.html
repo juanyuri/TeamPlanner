@@ -1,0 +1,20 @@
+{% extends './formulario.html' %}
+
+{% block titles %}
+<h1>Crear Tipo</h1>
+<h2>Simple formulario para la creación de un tipo</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/types" method="POST">
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      placeholder="Nombre"
+      aria-label="Nombre"
+      required
+    />
+
+    <button type="submit" class="contrast">Añadir Tipo</button>
+  </form>
+{% endblock %}
