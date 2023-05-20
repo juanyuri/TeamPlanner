@@ -4,11 +4,11 @@ import sirope
 
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from flask_login import login_required, current_user, login_user, logout_user
+from teamplanner.auth.model.userdto import UserDTO
 
-from model.userdto import UserDTO
 
 #Blueprint for application
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, template_folder="templates")
 srp = sirope.Sirope()
 
 

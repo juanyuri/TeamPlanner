@@ -3,9 +3,11 @@ import json
 
 import sirope
 import flask_login
-from model.userdto import UserDTO
+from teamplanner.auth.model.userdto import UserDTO
 
-from auth import auth
+from teamplanner.auth.auth import auth
+from teamplanner.tipos.tipos import tipos
+from teamplanner.movimientos.movimientos import movimientos
 from views import views
 
 
@@ -17,6 +19,9 @@ def create_app():
     lmanager.init_app(app)
     
     app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(tipos, url_prefix="/")
+    app.register_blueprint(movimientos, url_prefix="/")
+    app.register_blueprint(pokemon, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
     return lmanager, srp, app

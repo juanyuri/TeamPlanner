@@ -6,11 +6,11 @@ import uuid
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from flask_login import login_required, current_user, login_user, logout_user
 
-from model.userdto import UserDTO
-from model.teamdto import TeamDTO
+from teamplanner.auth.model.userdto import UserDTO
+""" from model.teamdto import TeamDTO
 from model.tipodto import TipoDTO
 from model.movedto import MovimientoDTO
-from model.pokemondto import PokemonDTO
+from model.pokemondto import PokemonDTO """
 
 
 #Blueprint for application
@@ -57,57 +57,6 @@ def teams():
         "usr": usr
     }
     return flask.render_template("main/team-form-add.html", **data)
-
-
-
-@views.route("/types", methods = ['GET','POST'])
-@login_required
-def types():
-    usr = UserDTO.current_user()
-    
-    if flask.request.method == "POST":
-        nombre = request.form.get("edNombre")
-        
-        tipo = TipoDTO(nombre)
-        srp.save(tipo)
-        
-        flash("Tipo creado correctamente", category="success")
-        return redirect( url_for("views.dashboard") )
-        
-    data = {
-        "usr": usr
-    }
-    return flask.render_template("main/type-form-add.html", **data)
-
-
-
-
-
-@views.route("/moves", methods = ['GET','POST'])
-@login_required
-def moves():
-    usr = UserDTO.current_user()
-    types = TipoDTO.findall(srp)
-    
-    if flask.request.method == "POST":
-        nombre = request.form.get("edNombre")
-        descripcion = request.form.get("edDescripcion")
-        categoria = request.form.get("edCategoria")
-        potencia = request.form.get("edPotencia")
-        tipo = request.form.get("edTipo")    
-         
-        move = MovimientoDTO(nombre, descripcion, categoria, potencia, tipo)
-        srp.save(move)
-        
-        flash("Movimiento creado correctamente", category="success")
-        return redirect( url_for("views.dashboard") )
-        
-    data = {
-        "types": types,
-        "usr": usr
-    }
-    return flask.render_template("main/move-form-add.html", **data)
-
 
 
 
