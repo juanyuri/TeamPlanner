@@ -1,6 +1,7 @@
 import flask
 import flask_login
 import sirope
+import uuid
 
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from flask_login import login_required, current_user, login_user, logout_user
@@ -9,6 +10,7 @@ from model.userdto import UserDTO
 from model.teamdto import TeamDTO
 from model.tipodto import TipoDTO
 from model.movedto import MovimientoDTO
+from model.pokemondto import PokemonDTO
 
 
 #Blueprint for application
@@ -54,7 +56,7 @@ def teams():
     data = {
         "usr": usr
     }
-    return flask.render_template("main/pkmn-form-add.html", **data)
+    return flask.render_template("main/team-form-add.html", **data)
 
 
 
@@ -92,12 +94,9 @@ def moves():
         descripcion = request.form.get("edDescripcion")
         categoria = request.form.get("edCategoria")
         potencia = request.form.get("edPotencia")
-        tipo = request.form.get("edTipo")
-        print(str(tipo))
-        
+        tipo = request.form.get("edTipo")    
+         
         move = MovimientoDTO(nombre, descripcion, categoria, potencia, tipo)
-        
-        print(move)
         srp.save(move)
         
         flash("Movimiento creado correctamente", category="success")
@@ -108,3 +107,37 @@ def moves():
         "usr": usr
     }
     return flask.render_template("main/move-form-add.html", **data)
+
+
+
+
+@views.route("/pokemon", methods = ['GET','POST'])
+@login_required
+def pokemon():
+    usr = UserDTO.current_user()
+    types = TipoDTO.findall(srp)
+    moves = MovimientoDTO.findall(srp)
+    
+    if flask.request.method == "POST":
+        especie = request.form.get("edEspecie")
+        pokedex = request.form.get("edPokedex")
+        nivel = request.form.get("edNivel")
+        move1 = request.form.get("edMove1")
+        move2 = request.form.get("edMove2")
+        tipo = request.form.get("edTipo")
+        
+        id = 1
+        pkmn = PokemonDTO(id, especie, pokedex, nivel, move1, move2, tipo)
+
+        print(pkmn)
+        srp.save(pkmn)
+        
+        flash("Pokémon creado correctamente", category="success")
+        return redirect( url_for("views.dashboard") )
+        
+    data = {
+        "types": types,
+        "moves": moves,
+        "usr": usr
+    }
+    return flask.render_template("main/pkmn-form-add.html", **data)
