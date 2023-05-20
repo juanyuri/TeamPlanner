@@ -1,0 +1,53 @@
+{% extends 'form.html' %}
+
+{% block titles %}
+<h1>Crear Pokemon</h1>
+<h2>Simple formulario para la creación de un Pokémon</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/pokemon" method="POST">
+    <input type="text"
+      id="edEspecie"
+      name="edEspecie"
+      placeholder="Especie"
+      aria-label="Especie"
+      required
+    />
+    <input type="number"
+      id="edPokedex"
+      name="edPokedex"
+      placeholder="Número Pokédex"
+      aria-label="Número Pokédex"
+      required
+    />
+    <input type="number"
+      id="edNivel"
+      name="edNivel"
+      placeholder="Nivel"
+      aria-label="Nivel"
+      required
+    />
+
+    <select id="edMove1" name="edMove1" required>
+        {% for move in moves %}
+          <option value="{{ move.nombre }}">{{ move.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="edMove2" name="edMove2" required>
+        {% for move in moves %}
+          <option value="{{ move.nombre }}">{{ move.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="edTipo" name="edTipo" required>
+        {% for type in types %}
+          <option value="{{ type.nombre }}">{{ type.nombre }}</option>
+        {% endfor %}
+    </select>
+
+
+    <button type="submit" class="contrast">Añadir Pokémon</button>
+  </form>
+{% endblock %}
