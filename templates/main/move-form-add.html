@@ -1,0 +1,46 @@
+{% extends './formulario.html' %}
+
+{% block titles %}
+<h1>Crear Movimiento</h1>
+<h2>Simple formulario para la creación de un movimiento</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/moves" method="POST">
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      placeholder="Nombre"
+      aria-label="Nombre"
+      required
+    />
+    <input type="text"
+      id="edDescripcion"
+      name="edDescripcion"
+      placeholder="Descripción"
+      aria-label="Descripción"
+      required
+    />
+    <input type="text"
+      id="edCategoria"
+      name="edCategoria"
+      placeholder="Categoría"
+      aria-label="Categoría"
+      required
+    />
+    <input type="number"
+      id="edPotencia"
+      name="edPotencia"
+      placeholder="Potencia"
+      aria-label="Potencia"
+      required
+    />
+    <select id="edTipo" name="edTipo" required>
+        {% for type in types %}
+          <option value="{{ type.nombre }}">{{ type.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="contrast">Añadir Movimiento</button>
+  </form>
+{% endblock %}

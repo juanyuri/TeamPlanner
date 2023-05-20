@@ -8,6 +8,7 @@ from flask_login import login_required, current_user, login_user, logout_user
 from model.userdto import UserDTO
 from model.teamdto import TeamDTO
 from model.tipodto import TipoDTO
+from model.movedto import MovimientoDTO
 
 
 #Blueprint for application
@@ -20,11 +21,13 @@ def dashboard():
     usr = UserDTO.current_user()
     teams = TeamDTO.findall(srp)
     tipos = TipoDTO.findall(srp)
+    moves = MovimientoDTO.findall(srp)
     
     data = {
         "usr": usr,
         "teams": teams,
-        "types" : tipos
+        "types" : tipos,
+        "moves" : moves
     }
     return flask.render_template("main/dashboard.html", **data)
 
@@ -43,7 +46,6 @@ def teams():
         autor = usr.nombre
         
         team = TeamDTO(nombre, descripcion, codigo_renta, fecha, autor, rating)
-        print("[Equipo]: ")
         srp.save(team)
         
         flash("Equipo creado correctamente", category="success")
@@ -65,7 +67,6 @@ def types():
         nombre = request.form.get("edNombre")
         
         tipo = TipoDTO(nombre)
-        print("[Tipo]: ")
         srp.save(tipo)
         
         flash("Tipo creado correctamente", category="success")
@@ -75,3 +76,35 @@ def types():
         "usr": usr
     }
     return flask.render_template("main/type-form-add.html", **data)
+
+
+
+
+
+@views.route("/moves", methods = ['GET','POST'])
+@login_required
+def moves():
+    usr = UserDTO.current_user()
+    types = TipoDTO.findall(srp)
+    
+    if flask.request.method == "POST":
+        nombre = request.form.get("edNombre")
+        descripcion = request.form.get("edDescripcion")
+        categoria = request.form.get("edCategoria")
+        potencia = request.form.get("edPotencia")
+        tipo = request.form.get("edTipo")
+        print(str(tipo))
+        
+        move = MovimientoDTO(nombre, descripcion, categoria, potencia, tipo)
+        
+        print(move)
+        srp.save(move)
+        
+        flash("Movimiento creado correctamente", category="success")
+        return redirect( url_for("views.dashboard") )
+        
+    data = {
+        "types": types,
+        "usr": usr
+    }
+    return flask.render_template("main/move-form-add.html", **data)
