@@ -14,7 +14,7 @@ srp = sirope.Sirope()
 
 
 
-@auth.route("/login" , methods = ['GET','POST'])
+@auth.route("/login", methods = ['GET','POST'])
 def login():
     usr = UserDTO.current_user()
     
@@ -36,7 +36,7 @@ def login():
             login_user(usr)
             srp.save(usr)
             flash("Usuario registrado correctamente", category="success")
-            return redirect(url_for("views.home"))
+            return redirect( url_for("views.dashboard") )
         
     data = {
         "usr": usr

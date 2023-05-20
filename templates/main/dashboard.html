@@ -1,5 +1,23 @@
 <main>
-    <input type="button" class="botonAcento" value="Crear Equipo">
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'error' %}
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    
+    <a type="button" href="{{ url_for('views.teams') }}">Crear Equipo</a>
 
     <table id="DexTable">
         <thead>
@@ -12,12 +30,14 @@
         </thead>
 
         <tbody>
-        <tr>
-            <td class="DexTable-Row-Codigo-Value"></td>
-            <td class="DexTable-Row-Creador-Header"></td>
-            <td class="DexTable-Row-NombreEquipo-Header"></td>
-            <td class="DexTable-Row-FechaCreacion-Header"></td>
-        </tr>
+            {% for team in teams %}
+            <tr>
+                <td class="DexTable-Row-Codigo-Value">{{ team.codigo }}</td>
+                <td class="DexTable-Row-Creador-Header">{{ team.autor }}</td>
+                <td class="DexTable-Row-NombreEquipo-Header">{{ team.nombre }}</td>
+                <td class="DexTable-Row-FechaCreacion-Header">{{ team.fecha }}</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 

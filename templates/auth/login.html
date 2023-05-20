@@ -8,7 +8,6 @@
 
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 {% endblock %}
 
 
@@ -17,7 +16,7 @@
 <nav class="container-fluid">
     <ul>
       <li>
-        <a href="./" class="contrast" onclick="event.preventDefault()"><strong>TeamPlanner</strong></a>
+        <a class="contrast" href="{{ url_for("auth.login") }}"><strong>TeamPlanner</strong></a>
       </li>
     </ul>
   </nav>

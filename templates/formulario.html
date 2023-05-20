@@ -1,0 +1,47 @@
+{% extends './index.html' %}
+
+{% block title %}Teams{% endblock %}
+
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
+{% endblock %}
+
+
+{% block body %}
+<!-- Nav -->
+<nav class="container-fluid">
+    <ul>
+      <li>
+        <a href="./" class="contrast" onclick="event.preventDefault()"><strong>TeamPlanner</strong></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- ./ Nav -->
+
+  <!-- Main -->
+  <main class="container">
+    <article class="grid">
+      <div>
+        <hgroup>
+          {% block titles %}
+          {% endblock%}
+        </hgroup>
+
+        {% block formulario_CRUD %}
+        {% endblock %}
+        
+      </div>
+    </article>
+  </main>
+
+{% endblock %}
+
+{% block footer %}
+
+<footer class="container-fluid">
+    <small>Juan Yuri Díaz Sánchez • ALS 2023</small>
+</footer>
+
+{% endblock %}

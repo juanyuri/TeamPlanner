@@ -8,7 +8,8 @@
 
     <!-- Common CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
     <!-- Custom CSS -->
     {% block customCSS %}
     {% endblock %}
@@ -18,7 +19,7 @@
 </head>
 
 <body>
-      <!-- FLASH MESSAGES -->
+    <!-- FLASH MESSAGES -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
