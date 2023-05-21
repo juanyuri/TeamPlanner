@@ -1,0 +1,55 @@
+{% extends 'form.html' %}
+
+{% block title %}Visualizar Equipo{% endblock %}
+
+{% block titles %}
+<h1>Editar Equipo</h1>
+<h2>Editar las estadísticas del equipo: {{team.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/teams/edit/{{team.codigo}}" method="POST">
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{team.nombre}}"
+    /></label>
+
+    <label>Código de Renta
+    <input type="number"
+      id="edCodigo"
+      name="edCodigo"
+      aria-label="Codigo Renta"
+      value="{{team.codigo}}"
+      disabled
+    /></label>
+
+    <label>Descripción
+    <input type="text"
+      id="edDescripcion"
+      name="edDescripcion"
+      aria-label="Descripción"
+      value="{{team.codigo}}"
+    /></label>
+
+    <label>Fecha
+    <input type="date"
+      id="edFecha"
+      name="edFecha"
+      aria-label="Fecha"
+      value="{{team.fecha}}"
+    /></label>
+
+    <label>Rating
+    <input type="number"
+      id="edRating"
+      name="edRating"
+      aria-label="Rating"
+      value="{{team.rating}}"
+    /></label>
+
+    <button type="submit" class="contrast">Editar Equipo</button>
+  </form>
+{% endblock %}

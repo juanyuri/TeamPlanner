@@ -1,12 +1,14 @@
 {% extends 'form.html' %}
 
+{% block title %}Crear Equipo{% endblock %}
+
 {% block titles %}
 <h1>Crear Equipo</h1>
 <h2>Simple formulario para la creación de un equipo</h2>
 {% endblock%}
 
 {% block formulario_CRUD %}
-<form action="/teams" method="POST">
+<form action="/teams/add" method="POST">
     <input type="text"
       id="edNombre"
       name="edNombre"
@@ -42,6 +44,7 @@
       aria-label="Rating"
       required
     />
+
 
     <button type="submit" class="contrast">Añadir Equipo</button>
   </form>

@@ -1,53 +1,12 @@
+{% extends './index.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
 <main>
-    <!-- FLASH MESSAGES -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            {% if category == 'error' %}
-                <div class="alert alert-danger alter-dismissable fade show" role="alert">
-                {{ message }}
-                </div>
-            {% else %}
-                <div class="alert alert-success alter-dismissable fade show" role="alert">
-                {{ message }}
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    
-    <a type="button" href="{{ url_for('teams_blueprint.teams') }}">Crear Equipo</a>
-    <br>
     <a type="button" href="{{ url_for('tipos.types') }}">Crear Tipo</a>
-    <br>
     <a type="button" href="{{ url_for('movimientos.moves') }}">Crear Movimiento</a>
-    <br>
     <a type="button" href="{{ url_for('pokemones.pokemon') }}">Crear Pokémon</a>
-
-    <table id="DexTable">
-        <thead>
-            <tr class="header">
-                <th class="DexTable-Row-Codigo-Header">Código Préstamo</th>
-                <th class="DexTable-Row-Nombre-Header">Nombre</th>
-                <th class="DexTable-Row-FechaCreacion-Header">Fecha de Creación</th>
-                <th class="DexTable-Row-Creador-Header">Creador</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for team in teams %}
-            <tr>
-                <td class="DexTable-Row-Codigo-Value">{{ team.codigo }}</td>
-                <td class="DexTable-Row-Nombre-Value">{{ team.nombre }}</td>
-                <td class="DexTable-Row-FechaCreacion-Value">{{ team.fecha }}</td>
-                <td class="DexTable-Row-Creador-Value">{{ team.autor }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <br><br>
 
     <table id="TypesTable">
         <thead>
@@ -89,3 +48,4 @@
         </tbody>
     </table>
 </main>
+{% endblock %}

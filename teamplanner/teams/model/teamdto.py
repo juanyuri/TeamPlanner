@@ -14,6 +14,10 @@ class TeamDTO:
     def nombre(self):
         return self.__nombre
     
+    @nombre.setter
+    def nombre(self, nuevo):
+        self.__nombre = nuevo
+    
     @property
     def codigo(self):
         return self.__codigo
@@ -21,6 +25,10 @@ class TeamDTO:
     @property
     def fecha(self):
         return self.__fecha
+    
+    @fecha.setter
+    def fecha(self, nuevo):
+        self.__fecha = nuevo
     
     @property
     def autor(self):
@@ -30,9 +38,18 @@ class TeamDTO:
     def descripcion(self):
         return self.__descripcion
     
+    @descripcion.setter
+    def descripcion(self, nuevo):
+        self.__descripcion = nuevo
+    
     @property
     def rating(self):
         return self.__rating
+    
+    @rating.setter
+    def rating(self, nuevo):
+        self.__rating = nuevo
+    
     
     def __str__(self):
         return "Equipo [id=" + self.__codigo + ", descripcion=" + self.__descripcion + ", fechaCreacion=" + self.__fecha \

@@ -1,13 +1,4 @@
-{% extends './index.html' %}
-
-{% block title %}Teams{% endblock %}
-
-
-
-{% block customCSS %}
-<link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
-{% endblock %}
-
+{% extends 'index.html' %}
 
 {% block body %}
 <!-- Nav -->
@@ -35,13 +26,5 @@
       </div>
     </article>
   </main>
-
-{% endblock %}
-
-{% block footer %}
-
-<footer class="container-fluid">
-    <small>Juan Yuri Díaz Sánchez • ALS 2023</small>
-</footer>
 
 {% endblock %}

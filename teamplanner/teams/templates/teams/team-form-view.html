@@ -1,0 +1,60 @@
+{% extends 'form.html' %}
+
+{% block title %}Visualizar Equipo{% endblock %}
+
+{% block titles %}
+<h1>Ver Equipo</h1>
+<h2>Visualizar las estadísticas del equipo: {{team.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form>
+
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{team.nombre}}"
+      disabled
+    /></label>
+
+    <label>Código de Renta
+    <input type="number"
+      id="edCodigo"
+      name="edCodigo"
+      aria-label="Codigo Renta"
+      value="{{team.codigo}}"
+      disabled
+    /></label>
+
+    <label>Descripción
+    <input type="text"
+      id="edDescripcion"
+      name="edDescripcion"
+      aria-label="Descripción"
+      value="{{team.codigo}}"
+      disabled
+    /></label>
+
+    <label>Fecha
+    <input type="date"
+      id="edFecha"
+      name="edFecha"
+      aria-label="Fecha"
+      value="{{team.fecha}}"
+      disabled
+    /></label>
+
+    <label>Rating
+    <input type="number"
+      id="edRating"
+      name="edRating"
+      aria-label="Rating"
+      value="{{team.rating}}"
+      disabled
+    /></label>
+
+    <a href="/teams"><button type="button" class="contrast">Volver</button></a>
+  </form>
+{% endblock %}

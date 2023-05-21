@@ -22,13 +22,11 @@ srp = sirope.Sirope()
 @login_required
 def dashboard():
     usr = UserDTO.current_user()
-    teams = TeamDTO.findall(srp)
     tipos = TipoDTO.findall(srp)
     moves = MovimientoDTO.findall(srp)
     
     data = {
         "usr": usr,
-        "teams": teams,
         "types" : tipos,
         "moves" : moves
     }
