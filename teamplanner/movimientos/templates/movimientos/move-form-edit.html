@@ -1,0 +1,64 @@
+{% extends 'form.html' %}
+
+{% block titles %}
+<h1>Editar Movimiento</h1>
+<h2>Simple formulario para la edición de un movimiento</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/moves/edit/{{move.nombre}}" method="POST">
+
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{move.nombre}}"
+      required
+    /></label>
+
+    <label>Descripción
+    <input type="text"
+      id="edDescripcion"
+      name="edDescripcion"
+      aria-label="Descripción"
+      value="{{move.descripcion}}"
+      required
+    /></label>
+
+
+    <label>Categoría
+    <input type="text"
+      id="edCategoria"
+      name="edCategoria"
+      aria-label="Categoría"
+      value="{{move.categoria}}"
+      required
+    /></label>
+
+
+    <label>Potencia
+    <input type="number"
+      id="edPotencia"
+      name="edPotencia"
+      aria-label="Potencia"
+      value="{{move.potencia}}"
+      required
+    /></label>
+
+
+    <label>Tipo
+    <select id="edTipo" name="edTipo" required>
+        {% for type in types %}
+          {% if type.nombre == move.tipo %}
+            <option selected value="{{type.nombre}}">{{type.nombre}}</option>   
+          {%else%}
+            <option value="{{type.nombre}}">{{type.nombre}}</option>
+          {% endif %} 
+        {% endfor %}
+    </select>
+  </label>
+
+    <button type="submit" class="contrast">Editar Movimiento</button>
+  </form>
+{% endblock %}

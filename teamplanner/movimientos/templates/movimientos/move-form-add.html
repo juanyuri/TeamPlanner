@@ -6,7 +6,8 @@
 {% endblock%}
 
 {% block formulario_CRUD %}
-<form action="/moves" method="POST">
+<form action="/moves/add" method="POST">
+  
     <input type="text"
       id="edNombre"
       name="edNombre"
@@ -14,6 +15,7 @@
       aria-label="Nombre"
       required
     />
+
     <input type="text"
       id="edDescripcion"
       name="edDescripcion"
@@ -21,6 +23,7 @@
       aria-label="Descripción"
       required
     />
+
     <input type="text"
       id="edCategoria"
       name="edCategoria"
@@ -28,6 +31,7 @@
       aria-label="Categoría"
       required
     />
+
     <input type="number"
       id="edPotencia"
       name="edPotencia"
@@ -35,6 +39,7 @@
       aria-label="Potencia"
       required
     />
+
     <select id="edTipo" name="edTipo" required>
         {% for type in types %}
           <option value="{{ type.nombre }}">{{ type.nombre }}</option>

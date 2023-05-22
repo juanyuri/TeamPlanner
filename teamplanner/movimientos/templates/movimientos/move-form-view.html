@@ -1,0 +1,63 @@
+{% extends 'form.html' %}
+
+{% block title %}Visualizar Movimiento{% endblock %}
+
+{% block titles %}
+<h1>Ver Movimiento</h1>
+<h2>Visualizar las propiedades del movimiento: {{move.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form>
+    
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{move.nombre}}"
+      disabled
+    /></label>
+
+
+    <label>Descripción
+    <input type="text"
+      id="edDescripcion"
+      name="edDescripcion"
+      aria-label="Descripción"
+      value="{{move.descripcion}}"
+      disabled
+    /></label>
+
+
+    <label>Categoría
+    <input type="text"
+      id="edCategoria"
+      name="edCategoria"
+      aria-label="Categoría"
+      value="{{move.categoria}}"
+      disabled
+    /></label>
+
+
+    <label>Potencia
+    <input type="number"
+      id="edPotencia"
+      name="edPotencia"
+      aria-label="Potencia"
+      value="{{move.potencia}}"
+      disabled
+    /></label>
+
+    <label>Tipo
+    <input type="text"
+      id="edTipo"
+      name="edTipo"
+      aria-label="Tipo"
+      value="{{move.tipo}}"
+      disabled
+    /></label>
+
+    <a href="/moves"><button type="button" class="contrast">Volver</button></a>
+  </form>
+{% endblock %}

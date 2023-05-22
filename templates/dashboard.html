@@ -6,31 +6,7 @@
 <main>
     <a type="button" href="{{ url_for('teams_blueprint.teams') }}">Equipos</a>
     <a type="button" href="{{ url_for('types_blueprint.types') }}">Tipos</a>
-    <a type="button" href="{{ url_for('movimientos.moves') }}">Movimientos</a>
+    <a type="button" href="{{ url_for('moves_blueprint.moves') }}">Movimientos</a>
     <a type="button" href="{{ url_for('pokemones.pokemon') }}">Pokemon</a>
-
-    <br><br>
-
-    <table id="MoveDex">
-        <thead>
-            <tr class="header">
-                <th class="MoveDex-Row-Nombre-Header">Nombre</th>
-                <th class="MoveDex-Row-Categoria-Header">Categoria</th>
-                <th class="MoveDex-Row-Potencia-Header">Potencia</th>
-                <th class="MoveDex-Row-Tipo-Header">Tipo</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for move in moves %}
-            <tr>
-                <td class="MoveDex-Row-Nombre-Value">{{ move.nombre }}</td>
-                <td class="MoveDex-Row-Categoria-Value">{{ move.categoria }}</td>
-                <td class="MoveDex-Row-Potencia-Value">{{ move.potencia }}</td>
-                <td class="MoveDex-Row-Tipo-Value">{{ move.tipo }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </main>
 {% endblock %}
