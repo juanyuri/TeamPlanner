@@ -8,6 +8,10 @@ class TipoDTO:
     @property
     def nombre(self):
         return self.__nombre
+    
+    @nombre.setter
+    def nombre(self, nuevo):
+        self.__nombre = nuevo
 
     def __str__(self):
         return "Tipo [nombre=" + self.__nombre + "]"

@@ -1,0 +1,22 @@
+{% extends 'form.html' %}
+
+{% block title %}Editar Tipo{% endblock %}
+
+{% block titles %}
+<h1>Editar Tipo</h1>
+<h2>Editar las estadísticas del tipo: {{tipo.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/types/edit/{{tipo.nombre}}" method="POST">
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{tipo.nombre}}"
+    /></label>
+
+    <button type="submit" class="contrast">Editar Tipo</button>
+  </form>
+{% endblock %}

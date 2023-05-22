@@ -1,0 +1,24 @@
+{% extends 'form.html' %}
+
+{% block title %}Visualizar Tipo{% endblock %}
+
+{% block titles %}
+<h1>Eliminar Equipo</h1>
+<h2>Visualizar las estadísticas del tipo: {{tipo.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/types/delete/{{tipo.nombre}}" method="POST">
+
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{tipo.nombre}}"
+      disabled
+    /></label>
+
+    <button type="submit" class="contrast">Eliminar</button>
+  </form>
+{% endblock %}

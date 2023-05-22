@@ -4,25 +4,10 @@
 
 {% block body %}
 <main>
-    <a type="button" href="{{ url_for('tipos.types') }}">Crear Tipo</a>
-    <a type="button" href="{{ url_for('movimientos.moves') }}">Crear Movimiento</a>
-    <a type="button" href="{{ url_for('pokemones.pokemon') }}">Crear Pokémon</a>
-
-    <table id="TypesTable">
-        <thead>
-            <tr class="header">
-                <th class="TypesTable-Row-Nombre-Header">Tipos</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for type in types %}
-            <tr>
-                <td class="TypesTable-Row-Nombre-Value">{{ type.nombre }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <a type="button" href="{{ url_for('teams_blueprint.teams') }}">Equipos</a>
+    <a type="button" href="{{ url_for('types_blueprint.types') }}">Tipos</a>
+    <a type="button" href="{{ url_for('movimientos.moves') }}">Movimientos</a>
+    <a type="button" href="{{ url_for('pokemones.pokemon') }}">Pokemon</a>
 
     <br><br>
 

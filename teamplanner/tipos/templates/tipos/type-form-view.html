@@ -1,0 +1,24 @@
+{% extends 'form.html' %}
+
+{% block title %}Visualizar Tipo{% endblock %}
+
+{% block titles %}
+<h1>Ver Tipo</h1>
+<h2>Visualizar las estadísticas del tipo: {{tipo.nombre}}</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form>
+
+    <label>Nombre
+    <input type="text"
+      id="edNombre"
+      name="edNombre"
+      aria-label="Nombre"
+      value="{{tipo.nombre}}"
+      disabled
+    /></label>
+
+    <a href="/types"><button type="button" class="contrast">Volver</button></a>
+  </form>
+{% endblock %}
