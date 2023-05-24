@@ -115,7 +115,7 @@ def delete_move(move_name):
     move = MovimientoDTO.find(srp, move_name)
     
     if flask.request.method == "POST":
-        srp.delete(move)
+        srp.delete(move.__oid__)
         flash("Movimiento eliminado correctamente", category="success")
         return redirect( url_for(".moves") )
     

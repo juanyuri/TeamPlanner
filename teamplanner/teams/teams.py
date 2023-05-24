@@ -115,9 +115,9 @@ def view_team(team_code):
 def delete_team(team_code):
     usr = UserDTO.current_user()
     equipo = TeamDTO.find(srp, team_code)
-    print(equipo)
+    
     if flask.request.method == "POST":
-        srp.delete(equipo)
+        srp.delete(equipo.__oid__)
         flash("Equipo eliminado correctamente", category="success")
         return redirect( url_for("teams_blueprint.teams") )
     
