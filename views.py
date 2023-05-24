@@ -19,9 +19,10 @@ views = Blueprint('views', __name__)
 srp = sirope.Sirope()
 
 @views.route("/dashboard")
-@login_required
 def dashboard():
     usr = UserDTO.current_user()
+    print("DASHBOARD!")
+    print(usr)
     tipos = TipoDTO.findall(srp)
     moves = MovimientoDTO.findall(srp)
     

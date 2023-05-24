@@ -9,7 +9,8 @@ class UserDTO(flask_login.UserMixin):
         self.__password = password
         
     def __str__(self):
-        return "Nombre: " + self.__nombre + ". Email: " + self.__email 
+        return "Equipo [nombre=" + self.__nombre + ", email=" + \
+            self.__email + ", contraseña=" + self.__password + "]"
     
     @property
     def email(self):
@@ -18,12 +19,16 @@ class UserDTO(flask_login.UserMixin):
     @property
     def nombre(self):
         return self.__nombre
+    
+    @property
+    def password(self):
+        return self.__password
 
     def get_id(self):
-        return self.email
+        return self.nombre
     
     def chk_password(self, password):
-        return safe.check_password_hash(self._password, password)
+        return safe.check_password_hash(self.__password, password)
     
     @staticmethod
     def current_user():
@@ -37,5 +42,5 @@ class UserDTO(flask_login.UserMixin):
 
     
     @staticmethod
-    def find(s: sirope.Sirope, email: str) -> "UserDTO":
-        return s.find_first(UserDTO, lambda u: u.email == email)
+    def find(s: sirope.Sirope, nombre: str) -> "UserDTO":
+        return s.find_first(UserDTO, lambda u: u.nombre == nombre)

@@ -34,14 +34,17 @@ lmanager, srp, app = create_app()
 
 
 
-#TODO: Refactorizar y poner en auth.py
 @lmanager.user_loader
-def user_loader(email):
-    return UserDTO.find(srp, email)
-
+def user_loader(nombre):
+    print("Searching user_loader")
+    print(nombre)
+    variable=  UserDTO.find(srp, nombre)
+    print("Found: ")
+    print(variable)
+    return variable
 
 
 @lmanager.unauthorized_handler
 def unauthorized_handler():
-    flask.flash("Unauthorized")
+    flask.flash("No autorizado")
     return flask.redirect("/")

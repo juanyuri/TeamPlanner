@@ -104,7 +104,7 @@ def delete_type(type_name):
     print(tipo)
     
     if flask.request.method == "POST":
-        srp.delete(tipo)
+        srp.delete(tipo.__oid__)
         flash("Equipo eliminado correctamente", category="success")
         return redirect( url_for(".types") )
     

@@ -1,6 +1,7 @@
 import flask
 import flask_login
 import sirope
+import werkzeug.security as safe
 
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from flask_login import login_required, current_user, login_user, logout_user
@@ -20,23 +21,31 @@ def login():
     
     if flask.request.method == "POST":
         nombre = request.form.get("edNombre")
-        email = request.form.get("edEmail")
         password = request.form.get("edPassword")
         remember = True if request.form.get('edRemember') else False
         
         #TODO: Refactorizar a una función if-elses con returns
         if len(nombre) < 2:
             flash("El nombre debe tener una longitud superior a 2", category="error")
-        elif len(email) < 4:
-            flash("El email debe tener una longitud superior a 4", category="error")
         elif len(password) < 4:
             flash("La contraseña debe tener una longitud superior a 4", category="error")
         else:
-            usr = UserDTO(nombre, email, password)
+            usr = UserDTO.find(srp, nombre)
+            #if not srp.exists(usr):
+            #    flash("Usuario no existente", category="error")
+            #    return redirect("/")
+            
+            if not usr.chk_password(password):
+                flash("Contraseña incorrecta", category="error")
+                return redirect("/login")
+            
             login_user(usr)
-            srp.save(usr)
-            flash("Usuario registrado correctamente", category="success")
+            print("Usuario login.")
+            print(UserDTO.current_user())
+            flash("Usuario logueado correctamente", category="success")
             return redirect( url_for("views.dashboard") )
+            
+            
         
     data = {
         "usr": usr
@@ -55,10 +64,34 @@ def logout():
 
 
 
-@auth.route("/register")
+@auth.route("/register", methods = ['GET','POST'])
 def register():
     usr = UserDTO.current_user()
+    
+    if flask.request.method == "POST":
+        nombre = request.form.get("edNombre")
+        email = request.form.get("edEmail")
+        password = request.form.get("edPassword")
+        password_salt = safe.generate_password_hash(password)
+        remember = True if request.form.get('edRemember') else False
+        
+        #TODO: Refactorizar a una función if-elses con returns
+        if len(nombre) < 2:
+            flash("El nombre debe tener una longitud superior a 2", category="error")
+        elif len(email) < 4:
+            flash("El email debe tener una longitud superior a 4", category="error")
+        elif len(password) < 4:
+            flash("La contraseña debe tener una longitud superior a 4", category="error")
+        else:
+            usr = UserDTO(nombre, email, password_salt)
+            srp.save(usr)
+            flash("Usuario registrado correctamente", category="success")
+            return redirect( url_for(".login") )
+            
+            
+            
+        
     data = {
         "usr": usr
     }
-    return flask.render_template("auth/register.html", **data)
+    return flask.render_template("auth/registro.html", **data)

@@ -4,6 +4,7 @@
 
 {% block body %}
 <main>
+    <p>{{ usr.nombre }}</p>
     <a type="button" href="{{ url_for('teams_blueprint.teams') }}">Equipos</a>
     <a type="button" href="{{ url_for('types_blueprint.types') }}">Tipos</a>
     <a type="button" href="{{ url_for('moves_blueprint.moves') }}">Movimientos</a>

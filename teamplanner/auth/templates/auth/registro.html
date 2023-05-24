@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+
+
+
+{% block title %}Registro{% endblock %}
+
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
+{% endblock %}
+
+
+{% block body %}
+<!-- Nav -->
+<nav class="container-fluid">
+    <ul>
+      <li>
+        <a class="contrast" href="{{ url_for("auth.register") }}"><strong>TeamPlanner</strong></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- ./ Nav -->
+
+  <!-- Main -->
+  <main class="container">
+    <article class="grid">
+
+    <div>
+    <hgroup>
+        <h1>Registro</h1>
+        <h2>Bienvenido, entrenador, introduzca sus datos</h2>
+    </hgroup>
+        <form action="/register" method="POST">
+            <input type="text"
+                id="edNombre"
+                name="edNombre"
+                placeholder="Usuario"
+                aria-label="Usuario"
+                required
+            />
+            <input type="text"
+                id="edEmail"
+                name="edEmail"
+                placeholder="Email"
+                aria-label="Email"
+                required
+            />
+            <input type="password"
+                id="edPassword"
+                name="edPassword"
+                placeholder="Contraseña"
+                aria-label="Contrasena"
+                required
+            />
+            <button type="submit" class="contrast">Registro</button>
+        </form>
+    </div>
+
+    </article>
+  </main>
+
+{% endblock %}
+
+{% block footer %}
+
+<footer class="container-fluid">
+    <small>Juan Yuri Díaz Sánchez • ALS 2023</small>
+</footer>
+
+{% endblock %}
