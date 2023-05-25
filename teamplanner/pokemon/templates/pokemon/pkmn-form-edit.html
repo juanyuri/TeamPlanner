@@ -1,0 +1,66 @@
+{% extends 'form.html' %}
+
+{% block titles %}
+<h1>Editar Pokemon</h1>
+<h2>Simple formulario para la edición de un Pokémon</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/pokemon/edit/{{pkmn.especie}}" method="POST">
+    
+    <label>Especie
+    <input type="text"
+      id="edEspecie"
+      name="edEspecie"
+      aria-label="Especie"
+      value="{{pkmn.especie}}"
+      required
+    /></label>
+
+    <label>Num Pokedex
+    <input type="number"
+      id="edPokedex"
+      name="edPokedex"
+      aria-label="Número Pokédex"
+      value="{{pkmn.num_pokedex}}"
+      required
+    /></label>
+
+    <label>Nivel
+    <input type="number"
+      id="edNivel"
+      name="edNivel"
+      aria-label="Nivel"
+      value="{{pkmn.nivel}}"
+      required
+    /></label>
+
+    <label>Movimiento 1
+    <select id="edMove1" name="edMove1" required>
+        {% for move in moves %}
+          <option value="{{ move.nombre }}">{{ move.nombre }}</option>
+        {% endfor %}
+    </select></label>
+
+    <label>Movimiento 2
+    <select id="edMove2" name="edMove2" required>
+        {% for move in moves %}
+          <option value="{{ move.nombre }}">{{ move.nombre }}</option>
+        {% endfor %}
+    </select></label>
+
+    <label>Tipo
+        <select id="edTipo" name="edTipo" required>
+            {% for type in types %}
+              {% if type.nombre == pkmn.tipo %}
+                <option selected value="{{type.nombre}}">{{type.nombre}}</option>   
+              {%else%}
+                <option value="{{type.nombre}}">{{type.nombre}}</option>
+              {% endif %}
+            {% endfor %}
+        </select></label>
+
+
+    <button type="submit" class="contrast">Editar Pokémon</button>
+  </form>
+{% endblock %}

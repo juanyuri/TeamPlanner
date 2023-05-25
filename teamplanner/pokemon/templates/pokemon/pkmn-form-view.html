@@ -1,0 +1,67 @@
+{% extends 'form.html' %}
+
+{% block titles %}
+<h1>Visualizar Pokemon</h1>
+<h2>Simple formulario para la ver las características de un Pokémon</h2>
+{% endblock%}
+
+{% block formulario_CRUD %}
+<form action="/pokemon/view/{{pkmn_sp}}" method="POST">
+    
+    <label>Especie
+    <input type="text"
+      id="edEspecie"
+      name="edEspecie"
+      aria-label="Especie"
+      value="{{pkmn.especie}}"
+      disabled
+    /></label>
+
+    <label>Num Pokedex
+    <input type="number"
+      id="edPokedex"
+      name="edPokedex"
+      aria-label="Número Pokédex"
+      value="{{pkmn.num_pokedex}}"
+      disabled
+    /></label>
+
+    <label>Nivel
+    <input type="number"
+      id="edNivel"
+      name="edNivel"
+      aria-label="Nivel"
+      value="{{pkmn.nivel}}"
+      disabled
+    /></label>
+
+    <label>Movimiento 1
+    <input type="text"
+        id="edMove1"
+        name="edMove1"
+        aria-label="Move1"
+        value="{{pkmn.move1}}"
+        disabled
+    /></label>
+
+    <label>Movimiento 2
+    <input type="text"
+        id="edMove2"
+        name="edMove2"
+        aria-label="Move2"
+        value="{{pkmn.move2}}"
+        disabled
+    /></label>
+
+    <label>Tipo
+    <input type="text"
+        id="edTipo"
+        name="edTipo"
+        aria-label="Tipo"
+        value="{{pkmn.tipo}}"
+        disabled
+    /></label>
+
+    <a href="/pokemon"><button type="button" class="contrast">Volver</button></a>
+  </form>
+{% endblock %}

@@ -31,9 +31,9 @@ def login():
             flash("La contraseña debe tener una longitud superior a 4", category="error")
         else:
             usr = UserDTO.find(srp, nombre)
-            #if not srp.exists(usr):
-            #    flash("Usuario no existente", category="error")
-            #    return redirect("/")
+            if not usr:
+                flash("Usuario no existente", category="error")
+                return redirect("/login")
             
             if not usr.chk_password(password):
                 flash("Contraseña incorrecta", category="error")

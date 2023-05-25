@@ -8,7 +8,7 @@ from teamplanner.auth.model.userdto import UserDTO
 from teamplanner.auth.auth import auth
 from teamplanner.tipos.tipos import types_blueprint
 from teamplanner.movimientos.movimientos import moves_blueprint
-from teamplanner.pokemon.pokemon import pokemones
+from teamplanner.pokemon.pokemon import pokemon_blueprint
 from teamplanner.teams.teams import teams_blueprint
 
 from views import views
@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(types_blueprint, url_prefix="/")
     app.register_blueprint(moves_blueprint, url_prefix="/")
-    app.register_blueprint(pokemones, url_prefix="/")
+    app.register_blueprint(pokemon_blueprint, url_prefix="/")
     app.register_blueprint(teams_blueprint, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
@@ -36,12 +36,7 @@ lmanager, srp, app = create_app()
 
 @lmanager.user_loader
 def user_loader(nombre):
-    print("Searching user_loader")
-    print(nombre)
-    variable=  UserDTO.find(srp, nombre)
-    print("Found: ")
-    print(variable)
-    return variable
+    return  UserDTO.find(srp, nombre)
 
 
 @lmanager.unauthorized_handler
