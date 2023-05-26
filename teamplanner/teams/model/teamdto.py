@@ -29,6 +29,10 @@ class TeamDTO:
     @fecha.setter
     def fecha(self, nuevo):
         self.__fecha = nuevo
+        
+    @codigo.setter
+    def codigo(self, nuevo):
+        self.__codigo = nuevo
     
     @property
     def autor(self):

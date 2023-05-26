@@ -33,7 +33,7 @@ def check_attrs(nombre, descripcion, codigo, fecha, autor, rating):
     
     #Validar la fecha
     try:
-        fecha_form = datetime.strptime(fecha, "%Y.%m.%d")
+        fecha_form = datetime.strptime(fecha, "%Y-%m-%d")
         actual = datetime.now()
         
         if fecha_form > actual:
@@ -46,8 +46,9 @@ def check_attrs(nombre, descripcion, codigo, fecha, autor, rating):
     if not autor.isalpha(): return "El autor debería tener solamente letras. Contacta con admin..."
     
     #Validar el rating
+    rating = int(rating)
     if not isinstance(rating, int) or rating < 0 or rating > 5:
-          return "El rating debe ser un número entero en el rango de 0 y 5"
+          return "El rating debe ser un entero en el rango de 0 y 5"
     
     #Si todos son correctos
     return ""
@@ -121,6 +122,7 @@ def edit_team(team_code):
             return redirect( url_for(".edit_team", team_code = team_code) )
         
         equipo.nombre = nombre
+        equipo.codigo = codigo_renta
         equipo.descripcion = descripcion
         equipo.fecha = fecha
         equipo.rating = rating
