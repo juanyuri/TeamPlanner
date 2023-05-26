@@ -2,8 +2,17 @@
 
 {% block title %}Pokemon{% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/sidebar.css') }}">
+{% endblock %}
+
 {% block body %}
-<a type="button" href="{{ url_for('pokemon_blueprint.add_pokemon') }}">Crear Pokemon</a>
+<div class="center-container">
+    <a href="{{ url_for('pokemon_blueprint.add_pokemon') }}" class="button_add">
+        <img src="/static/icons/add.svg" width="25" height="25">Crear
+    </a>
+</div>
+
 
 <div id="PokemonDex">
     <table>
@@ -28,9 +37,9 @@
                 <td class="PokemonDex-Row-Move1-Value">{{ pkmn.move1 }}</td>
                 <td class="PokemonDex-Row-Move2-Value">{{ pkmn.move2 }}</td>
                 <td class="PokemonDex-Row-Tipo-Value">{{ pkmn.tipo }}</td>
-                <td><a href="{{ url_for('pokemon_blueprint.edit_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/edit.svg"></a></td>
-                <td><a href="{{ url_for('pokemon_blueprint.view_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/detail.svg"></a></td>
-                <td><a href="{{ url_for('pokemon_blueprint.delete_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/delete.svg"></a></td>
+                <td class="centered"><a href="{{ url_for('pokemon_blueprint.edit_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/edit.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('pokemon_blueprint.view_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/detail.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('pokemon_blueprint.delete_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/delete.svg" width="22" height="22"></a></td>
             </tr>
             {% endfor %}
         </tbody>

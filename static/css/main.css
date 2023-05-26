@@ -72,3 +72,30 @@ article div:nth-of-type(2) {
   border-color:#f5c6cb;
 }
 
+.centered{
+  text-align: center;
+}
+
+.button_add{
+  background-color:var(--acento);
+  width:125px;
+  height:40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+  text-align: center;
+  color:white;
+  text-decoration: none;
+}
+
+.center-container{
+  display: flex;
+  align-content: left;
+  justify-content: left;
+  padding-top:40px;
+  padding-bottom:55px;
+  padding-left:2.5%;
+}

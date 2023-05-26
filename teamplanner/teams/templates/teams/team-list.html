@@ -2,8 +2,17 @@
 
 {% block title %}Equipos{% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/sidebar.css') }}">
+{% endblock %}
+
 {% block body %}
-<a type="button" href="{{ url_for('teams_blueprint.add_team') }}">Crear Equipo</a>
+<div class="center-container">
+    <a href="{{ url_for('teams_blueprint.add_team') }}" class="button_add">
+        <img src="/static/icons/add.svg" width="25" height="25">Crear
+    </a>
+</div>
+
 
 <div id="TeamDex">
     <table>
@@ -24,9 +33,9 @@
                 <td class="TeamDex-Row-Nombre-Value">{{ team.nombre }}</td>
                 <td class="TeamDex-Row-FechaCreacion-Value">{{ team.fecha }}</td>
                 <td class="TeamDex-Row-Creador-Value">{{ team.autor }}</td>
-                <td><a href="{{ url_for('teams_blueprint.edit_team', team_code = team.codigo) }}"><img src="/static/icons/edit.svg"></a></td>
-                <td><a href="{{ url_for('teams_blueprint.view_team', team_code = team.codigo) }}"><img src="/static/icons/detail.svg"></a></td>
-                <td><a href="{{ url_for('teams_blueprint.delete_team', team_code = team.codigo) }}"><img src="/static/icons/delete.svg"></a></td>
+                <td class="centered"><a href="{{ url_for('teams_blueprint.edit_team', team_code = team.codigo) }}"><img src="/static/icons/edit.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('teams_blueprint.view_team', team_code = team.codigo) }}"><img src="/static/icons/detail.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('teams_blueprint.delete_team', team_code = team.codigo) }}"><img src="/static/icons/delete.svg" width="22" height="22"></a></td>
             </tr>
             {% endfor %}
         </tbody>

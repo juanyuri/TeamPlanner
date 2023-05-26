@@ -77,7 +77,6 @@ def edit_team(team_code):
         equipo.fecha = fecha
         equipo.rating = rating
         
-        team = TeamDTO(nombre, descripcion, codigo_renta, fecha, autor, rating)
         srp.save(equipo)
         
         flash("Equipo editado correctamente", category="success")

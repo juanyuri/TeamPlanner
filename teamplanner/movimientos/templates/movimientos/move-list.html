@@ -2,8 +2,16 @@
 
 {% block title %}Movimientos{% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/sidebar.css') }}">
+{% endblock %}
+
 {% block body %}
-<a type="button" href="{{ url_for('moves_blueprint.add_move') }}">Crear Movimiento</a>
+<div class="center-container">
+    <a href="{{ url_for('moves_blueprint.add_move') }}" class="button_add">
+        <img src="/static/icons/add.svg" width="25" height="25">Crear
+    </a>
+</div>
 
 <div id="MoveDex">
     <table>
@@ -24,9 +32,9 @@
                 <td class="MoveDex-Row-Categoria-Value">{{ move.categoria }}</td>
                 <td class="MoveDex-Row-Potencia-Value">{{ move.potencia }}</td>
                 <td class="MoveDex-Row-Tipo-Value">{{ move.tipo }}</td>
-                <td><a href="{{ url_for('moves_blueprint.edit_move', move_name = move.nombre) }}"><img src="/static/icons/edit.svg"></a></td>
-                <td><a href="{{ url_for('moves_blueprint.view_move', move_name = move.nombre) }}"><img src="/static/icons/detail.svg"></a></td>
-                <td><a href="{{ url_for('moves_blueprint.delete_move', move_name = move.nombre) }}"><img src="/static/icons/delete.svg"></a></td>
+                <td class="centered"><a href="{{ url_for('moves_blueprint.edit_move', move_name = move.nombre) }}"><img src="/static/icons/edit.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('moves_blueprint.view_move', move_name = move.nombre) }}"><img src="/static/icons/detail.svg" width="22" height="22"></a></td>
+                <td class="centered"><a href="{{ url_for('moves_blueprint.delete_move', move_name = move.nombre) }}"><img src="/static/icons/delete.svg" width="22" height="22"></a></td>
             </tr>
             {% endfor %}
         </tbody>

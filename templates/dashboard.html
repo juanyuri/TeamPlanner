@@ -2,6 +2,11 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/sidebar.css') }}">
+{% endblock %}
+
 {% block body %}
 <main>
     <p>{{ usr.nombre }}</p>

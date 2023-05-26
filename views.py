@@ -22,8 +22,6 @@ srp = sirope.Sirope()
 @login_required
 def dashboard():
     usr = UserDTO.current_user()
-    print("DASHBOARD!")
-    print(usr)
     tipos = TipoDTO.findall(srp)
     moves = MovimientoDTO.findall(srp)
     
