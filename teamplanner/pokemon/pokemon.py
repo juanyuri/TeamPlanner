@@ -126,10 +126,8 @@ def view_pokemon(pkmn_sp):
 def delete_pokemon(pkmn_sp):
     usr = UserDTO.current_user()
     pkmn = PokemonDTO.find(srp, pkmn_sp)
-    print("Eliminando pokemon...")
     
     if flask.request.method == "POST":
-        print("Eliminando oid...")
         srp.delete(pkmn.__oid__)
         flash("Pokemon eliminado correctamente", category="success")
         return redirect( url_for("pokemon_blueprint.pokemon") )
@@ -138,6 +136,4 @@ def delete_pokemon(pkmn_sp):
         "usr": usr,
         "pkmn": pkmn
     }
-    print(usr)
-    print(pkmn)
     return flask.render_template("pokemon/pkmn-form-delete.html", **data)

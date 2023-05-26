@@ -39,8 +39,6 @@ def login():
                 return redirect("/login")
             
             login_user(usr)
-            print("Usuario login.")
-            print(UserDTO.current_user())
             flash("Usuario logueado correctamente", category="success")
             return redirect( url_for("views.dashboard") )
             
