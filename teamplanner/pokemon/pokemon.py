@@ -17,6 +17,8 @@ srp = sirope.Sirope()
 
 def check_attrs(especie, nivel, num_pokedex, move1, move2, tipo):
     """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
+    num_pokedex = int(num_pokedex)
+    nivel = int(nivel)
     
     #Validar la especie
     if len(especie) <=0 or len(especie)> 30: return "La especie debe tener una longitud entre 1 y 30"

@@ -24,8 +24,8 @@ def check_attrs(nombre, descripcion, codigo, fecha, autor, rating):
     elif not nombre.isalpha():  return "El nombre debe contener solamente letras"
     
     #Validar la descripción
-    elif len(descripcion) <= 0 or len(descripcion) > 150: return "La descripción debe tener una longitud entre 1 y 150"
-    elif not descripcion.isalnum(): return "La descripción debe contener solamente letras y números"
+    if len(descripcion) <= 0 or len(descripcion) > 150: return "La descripción debe tener una longitud entre 1 y 150"
+    elif not descripcion.replace(' ','').isalnum(): return "La descripción debe contener solamente letras, números y espacios"
     
     #Validar codigo
     if len(codigo) != 6 or not codigo.isalnum(): 

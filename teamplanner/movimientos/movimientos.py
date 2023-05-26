@@ -20,7 +20,7 @@ def check_attrs(nombre, descripcion, categoria, potencia, tipo):
     
     #Validar la descripción
     elif len(descripcion) <= 0 or len(descripcion) > 150: return "La descripción debe tener una longitud entre 1 y 150"
-    elif not descripcion.isalnum(): return "La descripción debe contener solamente letras y números"
+    elif not descripcion.replace(' ','').isalnum(): return "La descripción debe contener solamente letras y números"
     
     #Validar la categoría
     elif not categoria.isalpha(): return "La categoría debería tener solamente letras"

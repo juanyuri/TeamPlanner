@@ -13,18 +13,21 @@ auth = Blueprint('auth', __name__, template_folder="templates")
 srp = sirope.Sirope()
 
 
-def check_attrs(nombre, email):
+def check_name(nombre):
     """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
     
     if len(nombre) <=0 or len(nombre)> 20: return "El nombre debe tener una longitud entre 1 y 20"
     elif not nombre.isalpha():  return "El nombre debe contener solamente letras"
+    
+    return ""
 
+def check_email(email):
     PATRON_EMAIL ="^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,6}$"
     if not(re.fullmatch(PATRON_EMAIL, email)) or len(email)>30:
        	return "Ingrese un correo electronico valido de hasta máximo de 30 caracteres"
     
-    #Si todos son correctos
     return ""
+    
 
 
 @auth.route("/login", methods = ['GET','POST'])
@@ -35,24 +38,24 @@ def login():
         nombre = request.form.get("edNombre")
         password = request.form.get("edPassword")
         
-        #TODO: Refactorizar a una función if-elses con returns
-        if len(nombre) < 2:
-            flash("El nombre debe tener una longitud superior a 2", category="error")
-        elif len(password) < 4:
-            flash("La contraseña debe tener una longitud superior a 4", category="error")
-        else:
-            usr = UserDTO.find(srp, nombre)
-            if not usr:
-                flash("Usuario no existente", category="error")
-                return redirect("/login")
-            
-            if not usr.chk_password(password):
-                flash("Contraseña incorrecta", category="error")
-                return redirect("/login")
-            
-            login_user(usr)
-            flash("Usuario logueado correctamente", category="success")
-            return redirect( url_for("views.dashboard") )
+        msg_error = check_name(nombre)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".login") )
+        
+        
+        usr = UserDTO.find(srp, nombre)
+        if not usr:
+            flash("Usuario no existente", category="error")
+            return redirect("/login")
+        
+        if not usr.chk_password(password):
+            flash("Contraseña incorrecta", category="error")
+            return redirect("/login")
+        
+        login_user(usr)
+        flash("Usuario logueado correctamente", category="success")
+        return redirect( url_for("views.dashboard") )
             
             
         
@@ -83,18 +86,20 @@ def register():
         password = request.form.get("edPassword")
         password_salt = safe.generate_password_hash(password)
         
-        #TODO: Refactorizar a una función if-elses con returns
-        if len(nombre) < 2:
-            flash("El nombre debe tener una longitud superior a 2", category="error")
-        elif len(email) < 4:
-            flash("El email debe tener una longitud superior a 4", category="error")
-        elif len(password) < 4:
-            flash("La contraseña debe tener una longitud superior a 4", category="error")
-        else:
-            usr = UserDTO(nombre, email, password_salt)
-            srp.save(usr)
-            flash("Usuario registrado correctamente", category="success")
-            return redirect( url_for(".login") )
+        msg_error = check_name(nombre)
+        msg_error_email = check_email(email)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".register") )
+        
+        if msg_error_email != '':
+            flash(msg_error_email, category="error")
+            return redirect( url_for(".register") )
+        
+        usr = UserDTO(nombre, email, password_salt)
+        srp.save(usr)
+        flash("Usuario registrado correctamente", category="success")
+        return redirect( url_for(".login") )
             
             
             
