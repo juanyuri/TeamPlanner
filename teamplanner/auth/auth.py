@@ -22,7 +22,6 @@ def login():
     if flask.request.method == "POST":
         nombre = request.form.get("edNombre")
         password = request.form.get("edPassword")
-        remember = True if request.form.get('edRemember') else False
         
         #TODO: Refactorizar a una función if-elses con returns
         if len(nombre) < 2:
@@ -73,7 +72,6 @@ def register():
         email = request.form.get("edEmail")
         password = request.form.get("edPassword")
         password_salt = safe.generate_password_hash(password)
-        remember = True if request.form.get('edRemember') else False
         
         #TODO: Refactorizar a una función if-elses con returns
         if len(nombre) < 2:
