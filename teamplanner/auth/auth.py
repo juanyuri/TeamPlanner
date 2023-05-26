@@ -30,6 +30,7 @@ def check_email(email):
     
 
 
+@auth.route("/", methods = ['GET','POST'])
 @auth.route("/login", methods = ['GET','POST'])
 def login():
     usr = UserDTO.current_user()
@@ -55,7 +56,7 @@ def login():
         
         login_user(usr)
         flash("Usuario logueado correctamente", category="success")
-        return redirect( url_for("views.dashboard") )
+        return redirect( url_for("teams_blueprint.teams") )
             
             
         
