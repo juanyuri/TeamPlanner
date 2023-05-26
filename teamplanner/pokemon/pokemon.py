@@ -51,9 +51,18 @@ def check_attrs(especie, nivel, num_pokedex, move1, move2, tipo):
 def pokemon():
     usr = UserDTO.current_user()
     pokemon = PokemonDTO.findall(srp)
+    
+    types = TipoDTO.findall(srp)
+    moves = MovimientoDTO.findall(srp)
+    
+    allEntitiesNeeded = True
+    if types == [] or moves == []:
+        allEntitiesNeeded = False
+        flash("Primeramente crea Movimientos o Tipos!!!", category="error")
         
     data = {
         "usr": usr,
+        "allEntitiesNeeded" : allEntitiesNeeded,
         "pokemon": pokemon
     }
     return flask.render_template("pokemon/pkmn-list.html", **data)

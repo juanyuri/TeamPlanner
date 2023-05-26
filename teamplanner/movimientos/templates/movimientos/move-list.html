@@ -11,9 +11,16 @@
 
 <div class="center-container">
     <h1 class="title">Movimientos</h1>
+    {% if allEntitiesNeeded %}
     <a href="{{ url_for('moves_blueprint.add_move') }}" class="button_add">
         <img src="/static/icons/add.svg" width="25" height="25">Crear
     </a>
+    {% else %}
+    <a href="#" class="button_disabled">
+        <img src="/static/icons/add.svg" width="25" height="25">Crear
+    </a>
+    {% endif %}
+    
 </div>
 
 <div id="MoveDex">

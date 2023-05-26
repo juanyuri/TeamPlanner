@@ -9,9 +9,15 @@
 {% block body %}
 <div class="center-container">
     <h1 class="title">Pokemon</h1>
+    {% if allEntitiesNeeded %}
     <a href="{{ url_for('pokemon_blueprint.add_pokemon') }}" class="button_add">
         <img src="/static/icons/add.svg" width="25" height="25">Crear
     </a>
+    {% else %}
+    <a href="#" class="button_disabled">
+        <img src="/static/icons/add.svg" width="25" height="25">Crear
+    </a>
+    {% endif %}
 </div>
 
 

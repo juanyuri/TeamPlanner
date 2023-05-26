@@ -82,6 +82,22 @@ article div:nth-of-type(2) {
   margin-top:30px;
 }
 
+.button_disabled{
+  background-color:rgb(135, 135, 135);
+  width:125px;
+  height:40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+  text-align: center;
+  color:white;
+  text-decoration: none;
+  margin-top:30px;
+}
+
 .center-container{
   display: flex;
   align-content: left;

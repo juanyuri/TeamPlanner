@@ -14,6 +14,7 @@ srp = sirope.Sirope()
 
 def check_attrs(nombre, descripcion, categoria, potencia, tipo):
     """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
+    potencia = int(potencia)
     
     if len(nombre) <=0 or len(nombre)> 20: return "El nombre debe tener una longitud entre 1 y 20"
     elif not nombre.isalpha():  return "El nombre debe contener solamente letras"
@@ -43,9 +44,17 @@ def check_attrs(nombre, descripcion, categoria, potencia, tipo):
 def moves():
     usr = UserDTO.current_user()
     moves = MovimientoDTO.findall(srp)
+    
+    types = TipoDTO.findall(srp)
+    
+    allEntitiesNeeded = True
+    if types == []:
+        allEntitiesNeeded = False
+        flash("Primeramente Tipos!!!", category="error")
 
     data = {
         "usr": usr,
+        "allEntitiesNeeded": allEntitiesNeeded,
         "moves": moves
     }
     return flask.render_template("movimientos/move-list.html", **data)
