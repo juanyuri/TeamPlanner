@@ -37,7 +37,6 @@ def add_type():
         nombre = request.form.get("edNombre")
         
         tipo = TipoDTO(nombre)
-        print(tipo)
         srp.save(tipo)
         
         flash("Tipo creado correctamente", category="success")
@@ -85,7 +84,6 @@ def view_type(type_name):
     usr = UserDTO.current_user()
     tipo = TipoDTO.find(srp, type_name)
     
-    
     data = {
         "usr": usr,
         "tipo": tipo
@@ -101,7 +99,6 @@ def view_type(type_name):
 def delete_type(type_name):
     usr = UserDTO.current_user()
     tipo = TipoDTO.find(srp, type_name)
-    print(tipo)
     
     if flask.request.method == "POST":
         srp.delete(tipo.__oid__)

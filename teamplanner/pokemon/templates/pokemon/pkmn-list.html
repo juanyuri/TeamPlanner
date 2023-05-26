@@ -4,33 +4,37 @@
 
 {% block body %}
 <a type="button" href="{{ url_for('pokemon_blueprint.add_pokemon') }}">Crear Pokemon</a>
-<table id="PokemonDex">
-    <thead>
-        <tr class="header">
-            <th class="PokemonDex-Row-Especie-Header">Especie</th>
-            <th class="PokemonDex-Row-NumPokedex-Header">Num Pokedex</th>
-            <th class="PokemonDex-Row-Nivel-Header">Nivel</th>
-            <th class="PokemonDex-Row-Move1-Header">Movimiento 1</th>
-            <th class="PokemonDex-Row-Move2-Header">Movimiento 2</th>
-            <th class="PokemonDex-Row-Tipo-Header">Tipo</th>
-            <th colspan="3">Acciones</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        {% for pkmn in pokemon %}
-        <tr>
-            <td class="PokemonDex-Row-Especie-Value">{{ pkmn.especie }}</td>
-            <td class="PokemonDex-Row-NumPokedex-Value">{{ pkmn.num_pokedex }}</td>
-            <td class="PokemonDex-Row-Nivel-Value">{{ pkmn.nivel }}</td>
-            <td class="PokemonDex-Row-Move1-Value">{{ pkmn.move1 }}</td>
-            <td class="PokemonDex-Row-Move2-Value">{{ pkmn.move2 }}</td>
-            <td class="PokemonDex-Row-Tipo-Value">{{ pkmn.tipo }}</td>
-            <td><a href="{{ url_for('pokemon_blueprint.edit_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/edit.svg"></a></td>
-            <td><a href="{{ url_for('pokemon_blueprint.view_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/detail.svg"></a></td>
-            <td><a href="{{ url_for('pokemon_blueprint.delete_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/delete.svg"></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div id="PokemonDex">
+    <table>
+        <thead>
+            <tr class="header">
+                <th class="PokemonDex-Row-Especie-Header">Especie</th>
+                <th class="PokemonDex-Row-NumPokedex-Header">Num Pokedex</th>
+                <th class="PokemonDex-Row-Nivel-Header">Nivel</th>
+                <th class="PokemonDex-Row-Move1-Header">Movimiento 1</th>
+                <th class="PokemonDex-Row-Move2-Header">Movimiento 2</th>
+                <th class="PokemonDex-Row-Tipo-Header">Tipo</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for pkmn in pokemon %}
+            <tr>
+                <td class="PokemonDex-Row-Especie-Value">{{ pkmn.especie }}</td>
+                <td class="PokemonDex-Row-NumPokedex-Value">{{ pkmn.num_pokedex }}</td>
+                <td class="PokemonDex-Row-Nivel-Value">{{ pkmn.nivel }}</td>
+                <td class="PokemonDex-Row-Move1-Value">{{ pkmn.move1 }}</td>
+                <td class="PokemonDex-Row-Move2-Value">{{ pkmn.move2 }}</td>
+                <td class="PokemonDex-Row-Tipo-Value">{{ pkmn.tipo }}</td>
+                <td><a href="{{ url_for('pokemon_blueprint.edit_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/edit.svg"></a></td>
+                <td><a href="{{ url_for('pokemon_blueprint.view_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/detail.svg"></a></td>
+                <td><a href="{{ url_for('pokemon_blueprint.delete_pokemon', pkmn_sp = pkmn.especie) }}"><img src="/static/icons/delete.svg"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

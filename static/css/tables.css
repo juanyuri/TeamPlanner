@@ -1,0 +1,40 @@
+table{
+    border-collapse: collapse;
+    width:95%;
+    margin-bottom:100px;
+}
+  
+table th, table td{
+    border-collapse: collapse;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-right:15px;
+    padding-left:15px;
+    text-align:left;
+    border: 1px solid #dde4eb;
+}
+  
+table tr:nth-child(2n){
+    background-color:#f6f8fa;
+}
+
+table tr:not(.header):hover{
+    background-color: #edf1f5;
+}
+
+.pkmn-table-th{
+    font-weight: bold;
+}
+
+.pkmn-table-th:hover{
+    background-color:#177d6a08;
+    cursor: pointer;
+}
+
+#TeamDex, #PokemonDex, #MoveDex, #TypeDex{
+    grid-area:table;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -8,7 +8,9 @@
 
     <!-- Common CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/pico.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/sidebar.css') }}">
+    
     
     <!-- Custom CSS -->
     {% block customCSS %}
@@ -19,6 +21,24 @@
 </head>
 
 <body>
+    <aside id="sidebar">
+      <a class="sidebar-item" href="{{ url_for('teams_blueprint.teams') }}">
+        <img src="{{ url_for('static', filename='/icons/home.svg') }}" width="32" height="32">
+      </a>
+      <a class="sidebar-item" type="button" href="{{ url_for('pokemon_blueprint.pokemon') }}">
+        <img src="{{ url_for('static', filename='/icons/pokemon.svg') }}" width="32" height="32">
+      </a>
+      <a class="sidebar-item" type="button" href="{{ url_for('moves_blueprint.moves') }}">
+        <img src="{{ url_for('static', filename='/icons/habilidades.svg') }}" width="32" height="32">
+      </a>
+      <a class="sidebar-item" type="button" href="{{ url_for('types_blueprint.types') }}">
+        <img src="{{ url_for('static', filename='/icons/tipos.svg') }}" width="32" height="32">
+      </a>
+      <a class="sidebar-item end" type="button" href="{{ url_for('auth.logout') }}">
+        <img src="{{ url_for('static', filename='/icons/logout.svg') }}" width="32" height="32">
+      </a>
+    </aside>
+    
     <!-- FLASH MESSAGES -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}

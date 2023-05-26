@@ -4,29 +4,33 @@
 
 {% block body %}
 <a type="button" href="{{ url_for('teams_blueprint.add_team') }}">Crear Equipo</a>
-<table id="TeamDex">
-    <thead>
-        <tr class="header">
-            <th class="TeamDex-Row-Codigo-Header">Código Préstamo</th>
-            <th class="TeamDex-Row-Nombre-Header">Nombre</th>
-            <th class="TeamDex-Row-FechaCreacion-Header">Fecha de Creación</th>
-            <th class="TeamDex-Row-Creador-Header">Creador</th>
-            <th colspan="3">Acciones</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        {% for team in teams %}
-        <tr>
-            <td class="TeamDex-Row-Codigo-Value">{{ team.codigo }}</td>
-            <td class="TeamDex-Row-Nombre-Value">{{ team.nombre }}</td>
-            <td class="TeamDex-Row-FechaCreacion-Value">{{ team.fecha }}</td>
-            <td class="TeamDex-Row-Creador-Value">{{ team.autor }}</td>
-            <td><a href="{{ url_for('teams_blueprint.edit_team', team_code = team.codigo) }}"><img src="/static/icons/edit.svg"></a></td>
-            <td><a href="{{ url_for('teams_blueprint.view_team', team_code = team.codigo) }}"><img src="/static/icons/detail.svg"></a></td>
-            <td><a href="{{ url_for('teams_blueprint.delete_team', team_code = team.codigo) }}"><img src="/static/icons/delete.svg"></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div id="TeamDex">
+    <table>
+        <thead>
+            <tr class="header">
+                <th class="TeamDex-Row-Codigo-Header">Código Préstamo</th>
+                <th class="TeamDex-Row-Nombre-Header">Nombre</th>
+                <th class="TeamDex-Row-FechaCreacion-Header">Fecha de Creación</th>
+                <th class="TeamDex-Row-Creador-Header">Creador</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for team in teams %}
+            <tr>
+                <td class="TeamDex-Row-Codigo-Value">{{ team.codigo }}</td>
+                <td class="TeamDex-Row-Nombre-Value">{{ team.nombre }}</td>
+                <td class="TeamDex-Row-FechaCreacion-Value">{{ team.fecha }}</td>
+                <td class="TeamDex-Row-Creador-Value">{{ team.autor }}</td>
+                <td><a href="{{ url_for('teams_blueprint.edit_team', team_code = team.codigo) }}"><img src="/static/icons/edit.svg"></a></td>
+                <td><a href="{{ url_for('teams_blueprint.view_team', team_code = team.codigo) }}"><img src="/static/icons/detail.svg"></a></td>
+                <td><a href="{{ url_for('teams_blueprint.delete_team', team_code = team.codigo) }}"><img src="/static/icons/delete.svg"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

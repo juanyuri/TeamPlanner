@@ -1,5 +1,10 @@
 {% extends 'index.html' %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/pico.css') }}">
+{% endblock %}
+
 {% block body %}
 <!-- Nav -->
 <nav class="container-fluid">

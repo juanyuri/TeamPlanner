@@ -5,29 +5,32 @@
 {% block body %}
 <a type="button" href="{{ url_for('moves_blueprint.add_move') }}">Crear Movimiento</a>
 
-<table id="MoveDex">
-    <thead>
-        <tr class="header">
-            <th class="MoveDex-Row-Nombre-Header">Nombre</th>
-            <th class="MoveDex-Row-Categoria-Header">Categoria</th>
-            <th class="MoveDex-Row-Potencia-Header">Potencia</th>
-            <th class="MoveDex-Row-Tipo-Header">Tipo</th>
-            <th colspan="3">Acciones</th>
-        </tr>
-    </thead>
+<div id="MoveDex">
+    <table>
+        <thead>
+            <tr class="header">
+                <th class="MoveDex-Row-Nombre-Header">Nombre</th>
+                <th class="MoveDex-Row-Categoria-Header">Categoria</th>
+                <th class="MoveDex-Row-Potencia-Header">Potencia</th>
+                <th class="MoveDex-Row-Tipo-Header">Tipo</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for move in moves %}
+            <tr>
+                <td class="MoveDex-Row-Nombre-Value">{{ move.nombre }}</td>
+                <td class="MoveDex-Row-Categoria-Value">{{ move.categoria }}</td>
+                <td class="MoveDex-Row-Potencia-Value">{{ move.potencia }}</td>
+                <td class="MoveDex-Row-Tipo-Value">{{ move.tipo }}</td>
+                <td><a href="{{ url_for('moves_blueprint.edit_move', move_name = move.nombre) }}"><img src="/static/icons/edit.svg"></a></td>
+                <td><a href="{{ url_for('moves_blueprint.view_move', move_name = move.nombre) }}"><img src="/static/icons/detail.svg"></a></td>
+                <td><a href="{{ url_for('moves_blueprint.delete_move', move_name = move.nombre) }}"><img src="/static/icons/delete.svg"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-    <tbody>
-        {% for move in moves %}
-        <tr>
-            <td class="MoveDex-Row-Nombre-Value">{{ move.nombre }}</td>
-            <td class="MoveDex-Row-Categoria-Value">{{ move.categoria }}</td>
-            <td class="MoveDex-Row-Potencia-Value">{{ move.potencia }}</td>
-            <td class="MoveDex-Row-Tipo-Value">{{ move.tipo }}</td>
-            <td><a href="{{ url_for('moves_blueprint.edit_move', move_name = move.nombre) }}"><img src="/static/icons/edit.svg"></a></td>
-            <td><a href="{{ url_for('moves_blueprint.view_move', move_name = move.nombre) }}"><img src="/static/icons/detail.svg"></a></td>
-            <td><a href="{{ url_for('moves_blueprint.delete_move', move_name = move.nombre) }}"><img src="/static/icons/delete.svg"></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock %}
