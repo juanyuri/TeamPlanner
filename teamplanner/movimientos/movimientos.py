@@ -11,6 +11,32 @@ from teamplanner.movimientos.model.movedto import MovimientoDTO
 moves_blueprint = Blueprint('moves_blueprint', __name__, template_folder="templates")
 srp = sirope.Sirope()
 
+
+def check_attrs(nombre, descripcion, categoria, potencia, tipo):
+    """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
+    
+    if len(nombre) <=0 or len(nombre)> 20: return "El nombre debe tener una longitud entre 1 y 20"
+    elif not nombre.isalpha():  return "El nombre debe contener solamente letras"
+    
+    #Validar la descripción
+    elif len(descripcion) <= 0 or len(descripcion) > 150: return "La descripción debe tener una longitud entre 1 y 150"
+    elif not descripcion.isalnum(): return "La descripción debe contener solamente letras y números"
+    
+    #Validar la categoría
+    elif not categoria.isalpha(): return "La categoría debería tener solamente letras"
+    
+    #Validar la potencia
+    elif not isinstance(potencia, int) or nivel < 0 or nivel > 150:
+        return "La potencia debe ser un número entero en el rango de 0 y 150"
+    
+    #Validar el tipo
+    elif len(tipo) <=0 or len(tipo)> 20: return "El tipo elegido debe tener una longitud entre 1 y 20"
+    elif not tipo.isalpha():  return "El tipo debe contener solamente letras"
+    
+    #Si todos son correctos
+    return ""
+
+
 #LIST MOVES
 @moves_blueprint.route("/moves", methods = ['GET','POST'])
 @login_required
@@ -38,6 +64,11 @@ def add_move():
         categoria = request.form.get("edCategoria")
         potencia = request.form.get("edPotencia")
         tipo = request.form.get("edTipo")
+        
+        msg_error = check_attrs(nombre, descripcion, categoria, potencia, tipo)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".add_move") )
         
         move = MovimientoDTO(nombre, descripcion, categoria, potencia, tipo)
         srp.save(move)
@@ -67,6 +98,11 @@ def edit_move(move_name):
         categoria = request.form.get("edCategoria")
         potencia = request.form.get("edPotencia")
         tipo = request.form.get("edTipo")
+        
+        msg_error = check_attrs(nombre, descripcion, categoria, potencia, tipo)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".edit_move", move_name = move_name) )
         
         move.nombre = nombre
         move.descripcion = descripcion

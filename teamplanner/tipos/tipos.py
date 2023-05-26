@@ -12,6 +12,16 @@ types_blueprint = Blueprint('types_blueprint', __name__, template_folder="templa
 srp = sirope.Sirope()
 
 
+def check_attrs(nombre):
+    """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
+    
+    if len(nombre) <=0 or len(nombre)> 20: return "El nombre debe tener una longitud entre 0 y 20"
+    elif not nombre.isalpha():  return "El nombre debe contener solamente letras"
+    return ""
+
+
+
+
 # LIST TYPES
 @types_blueprint.route("/types", methods = ['GET','POST'])
 @login_required
@@ -36,6 +46,12 @@ def add_type():
     if flask.request.method == "POST":
         nombre = request.form.get("edNombre")
         
+        msg_error = check_attrs(nombre)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".add_type") )
+        
+        
         tipo = TipoDTO(nombre)
         srp.save(tipo)
         
@@ -50,8 +66,6 @@ def add_type():
 
 
 
-
-
 # EDIT TYPE
 @types_blueprint.route("/types/edit/<type_name>", methods = ['GET','POST'])
 @login_required
@@ -61,6 +75,11 @@ def edit_type(type_name):
     
     if flask.request.method == "POST":
         nombre = request.form.get("edNombre")
+        
+        msg_error = check_attrs(nombre)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".edit_type", type_name = type_name) )
         
         tipo.nombre = nombre
         srp.save(tipo)

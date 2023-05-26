@@ -15,6 +15,35 @@ pokemon_blueprint = Blueprint('pokemon_blueprint', __name__, template_folder="te
 srp = sirope.Sirope()
 
 
+def check_attrs(especie, nivel, num_pokedex, move1, move2, tipo):
+    """ Funcion que devuelve un string si existe un error, si no lo hay devuelve cadena vacia """
+    
+    #Validar la especie
+    if len(especie) <=0 or len(especie)> 30: return "La especie debe tener una longitud entre 1 y 30"
+    elif not especie.isalpha():  return "La especie debe contener solamente letras"
+    
+    #Validar el nivel
+    elif not isinstance(nivel, int) or nivel < 0 or nivel > 100:
+        return "El rating debe ser un número entero en el rango de 0 y 100"
+      
+    #Validar el numero de la pokedex
+    elif not isinstance(num_pokedex, int) or num_pokedex < 0 or num_pokedex > 151:
+        return "El rating debe ser un número entero en el rango de 0 y 151"
+    
+    #Validación de los movimientos y el tipo
+    elif len(move1) <=0 or len(move1)> 20: return "El movimiento elegido debe tener una longitud entre 1 y 20"
+    elif not move1.isalpha():  return "El movimiento debe contener solamente letras"
+    
+    elif len(move2) <=0 or len(move2)> 20: return "El movimiento elegido debe tener una longitud entre 1 y 20"
+    elif not move2.isalpha():  return "El movimiento debe contener solamente letras"
+    
+    elif len(tipo) <=0 or len(tipo)> 20: return "El tipo elegido debe tener una longitud entre 1 y 20"
+    elif not tipo.isalpha():  return "El tipo debe contener solamente letras"
+    
+    #Si todos son correctos
+    return ""
+
+
 @pokemon_blueprint.route("/pokemon", methods = ['GET','POST'])
 @login_required
 def pokemon():
@@ -43,7 +72,12 @@ def add_pokemon():
         move2 = request.form.get("edMove2")
         tipo = request.form.get("edTipo")
         
-        #def __init__(self, id, especie, num_pokedex, nivel, move1, move2, tipo):
+        
+        msg_error = check_attrs(especie, nivel, pokedex, move1, move2, tipo)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".add_pokemon") )
+        
         pkmn = PokemonDTO(1, especie, pokedex, nivel, move1, move2, tipo)
         print(pkmn)
 
@@ -67,7 +101,6 @@ def add_pokemon():
 def edit_pokemon(pkmn_sp):
     usr = UserDTO.current_user()
     pkmn = PokemonDTO.find(srp, pkmn_sp)
-    print(pkmn)
     moves = MovimientoDTO.findall(srp)
     types = TipoDTO.findall(srp)
     
@@ -78,6 +111,11 @@ def edit_pokemon(pkmn_sp):
         move1 = request.form.get("edMove1")
         move2 = request.form.get("edMove2")
         tipo = request.form.get("edTipo")
+        
+        msg_error = check_attrs(especie, nivel, pokedex, move1, move2, tipo)
+        if msg_error != '':
+            flash(msg_error, category="error")
+            return redirect( url_for(".edit_pokemon",pkmn_sp = pkmn_sp) )
         
         pkmn.especie = especie
         pkmn.nivel = nivel
