@@ -40,21 +40,27 @@
     </aside>
     
     <!-- FLASH MESSAGES -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            {% if category == 'error' %}
-                <div class="alert alert-danger alter-dismissable fade show" role="alert">
-                {{ message }}
+    
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              {% if category == 'error' %}
+              <div class="toast-error">
+                <div class="toast-message-error">
+                  <p>{{ message }}</p>
                 </div>
-            {% else %}
-                <div class="alert alert-success alter-dismissable fade show" role="alert">
-                {{ message }}
+              </div>
+              {% else %}
+              <div class="toast-error">
+                <div class="toast-message-success">
+                  <p>{{ message }}</p>
                 </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
+              </div>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
 
     {% block body %}
     {% endblock %}

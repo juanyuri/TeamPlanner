@@ -692,7 +692,6 @@ dl,
 figure,
 form,
 ol,
-p,
 pre,
 table,
 ul {
@@ -809,9 +808,9 @@ hgroup > *:last-child,
   font-family: unset;
 }
 
-p {
+/* p {
   margin-bottom: var(--typography-spacing-vertical);
-}
+} */
 
 small {
   font-size: var(--font-size);
