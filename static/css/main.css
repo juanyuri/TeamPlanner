@@ -89,13 +89,24 @@ article div:nth-of-type(2) {
   text-align: center;
   color:white;
   text-decoration: none;
+  margin-top:30px;
 }
 
 .center-container{
   display: flex;
   align-content: left;
   justify-content: left;
+  flex-direction: column;
+
   padding-top:40px;
   padding-bottom:55px;
   padding-left:2.5%;
+}
+
+.title{
+  font-weight: bold;
+}
+
+.footer{
+  margin-left:130px;
 }
