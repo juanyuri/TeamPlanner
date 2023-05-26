@@ -27,7 +27,7 @@ def check_attrs(nombre, descripcion, categoria, potencia, tipo):
     elif not categoria.isalpha(): return "La categoría debería tener solamente letras"
     
     #Validar la potencia
-    elif not isinstance(potencia, int) or nivel < 0 or nivel > 150:
+    elif not isinstance(potencia, int) or potencia < 0 or potencia > 150:
         return "La potencia debe ser un número entero en el rango de 0 y 150"
     
     #Validar el tipo

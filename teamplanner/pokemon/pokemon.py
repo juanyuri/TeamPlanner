@@ -26,11 +26,11 @@ def check_attrs(especie, nivel, num_pokedex, move1, move2, tipo):
     
     #Validar el nivel
     elif not isinstance(nivel, int) or nivel < 0 or nivel > 100:
-        return "El rating debe ser un número entero en el rango de 0 y 100"
+        return "El nivel debe ser un número entero en el rango de 0 y 100"
       
     #Validar el numero de la pokedex
     elif not isinstance(num_pokedex, int) or num_pokedex < 0 or num_pokedex > 151:
-        return "El rating debe ser un número entero en el rango de 0 y 151"
+        return "El número de la pokedex debe ser un número entero en el rango de 0 y 151"
     
     #Validación de los movimientos y el tipo
     elif len(move1) <=0 or len(move1)> 20: return "El movimiento elegido debe tener una longitud entre 1 y 20"
